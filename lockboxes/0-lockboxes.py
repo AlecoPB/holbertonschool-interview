@@ -14,7 +14,7 @@ def canUnlockAll(boxes):
             if key < len(boxes) and key not in open_boxes:
                 new_keys.update(boxes[key])
                 open_boxes.add(key)
-                
+
         if not new_keys:
             break
 
