@@ -1,10 +1,10 @@
 #include "lists.h"
 
 /**
- * Description: Find a loop on a single linked list
  * find_listing_loop - find loop
  * @head: points to head
- * return: node of looping
+ * Description: Find a loop on a single linked list
+ * Return: node of looping
  */
 listint_t *find_listint_loop(listint_t *head)
 {
