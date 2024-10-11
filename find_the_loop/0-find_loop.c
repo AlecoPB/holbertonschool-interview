@@ -1,7 +1,7 @@
 #include "lists.h"
 
 /**
- * find_listing_loop - find loop
+ * find_listint_loop - find loop
  * @head: points to head
  * Description: Find a loop on a single linked list
  * Return: node of looping
