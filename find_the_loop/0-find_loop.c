@@ -9,21 +9,21 @@ while (fast != NULL && fast->next != NULL)
 slow = slow->next;
 fast = fast->next->next;
 
-// If the slow pointer meets the fast pointer, there is a loop
+/* If the slow pointer meets the fast pointer, there is a loop*/
 if (slow == fast)
 {
 slow = head;
 
-// Move both pointers one step at a time
+/* Move both pointers one step at a time*/
 while (slow != fast)
 {
 slow = slow->next;
 fast = fast->next;
 }
-// Return the node where the loop starts
-return slow;
+/* Return the node where the loop starts*/
+return (slow);
 }
 }
-// No loop found
-return NULL;
+/* No loop found*/
+return (NULL);
 }
