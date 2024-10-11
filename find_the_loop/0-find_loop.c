@@ -1,13 +1,13 @@
 #include "lists.h"
 
-listint_t *find_listint_loop(listint_t *head)
-{
 /**
  * find_listing_loop - find loop
  * @head: points to head
  * Description: Find a loop on a single linked list
  * Return: node of looping
  */
+listint_t *find_listint_loop(listint_t *head)
+{
 listint_t *slow = head, *fast = head;
 
 while (fast != NULL && fast->next != NULL)
