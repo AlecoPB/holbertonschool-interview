@@ -9,7 +9,7 @@
  * Description: Adds a new node
  * Return: new node
  */
-struct binary_tree_s *binary_tree_node(struct binary_tree_t *parent, int value)
+struct binary_tree_s *binary_tree_node(struct binary_tree_s *parent, int value)
 {
 // Allocate memory
 struct binary_tree_s *new_node = (struct binary_tree_s *)malloc(sizeof(struct binary_tree_s));
