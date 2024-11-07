@@ -1,80 +1,76 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "sort.h"
+#include <stdlib.h>
 
-void print_array(int *array, size_t size) {
-    for (size_t i = 0; i < size; i++) {
-        printf("%d ", array[i]);
-    }
-    printf("\n");
-}
-
-int get_max(int *array, size_t size) {
+/**
+ * get_max - Finds the maximum number in the array
+ * @array: The array to check
+ * @size: The size of the array
+ * Return: The maximum integer in the array
+ */
+int get_max(int *array, size_t size)
+{
     int max = array[0];
-    for (size_t i = 1; i < size; i++) {
-        if (array[i] > max) {
+    size_t i;
+
+    for (i = 1; i < size; i++)
+    {
+        if (array[i] > max)
             max = array[i];
-        }
     }
-    return max;
+    return (max);
 }
 
-void counting_sort_by_digit(int *array, size_t size, int exp) {
-    int *output = (int *)malloc(size * sizeof(int));
+/**
+ * counting_sort_by_digit - Sorts the array by the current digit
+ * @array: The array to sort
+ * @size: The size of the array
+ * @exp: The current digit position to sort by
+ */
+void counting_sort_by_digit(int *array, size_t size, int exp)
+{
+    int *output = malloc(size * sizeof(int));
     int count[10] = {0};
+    size_t i;
 
-    // Store count of occurrences for each digit (0-9)
-    for (size_t i = 0; i < size; i++) {
-        int digit = (array[i] / exp) % 10;
-        count[digit]++;
-    }
+    if (!output)
+        return;
 
-    // Change count[i] so it contains the actual position of this digit in output
-    for (int i = 1; i < 10; i++) {
+    for (i = 0; i < size; i++)
+        count[(array[i] / exp) % 10]++;
+
+    for (i = 1; i < 10; i++)
         count[i] += count[i - 1];
-    }
 
-    // Build the output array based on current digit
-    for (int i = size - 1; i >= 0; i--) {
-        int digit = (array[i] / exp) % 10;
-        output[count[digit] - 1] = array[i];
+    for (i = size; i > 0; i--)
+    {
+        int digit = (array[i - 1] / exp) % 10;
+        output[count[digit] - 1] = array[i - 1];
         count[digit]--;
     }
 
-    // Copy the output array to array, so that array now contains sorted numbers by current digit
-    for (size_t i = 0; i < size; i++) {
+    for (i = 0; i < size; i++)
         array[i] = output[i];
-    }
 
     free(output);
 }
 
-void radix_sort(int *array, size_t size) {
-    if (size <= 1) return;
+/**
+ * radix_sort - Sorts an array of integers in ascending order using LSD radix sort
+ * @array: The array to sort
+ * @size: The size of the array
+ */
+void radix_sort(int *array, size_t size)
+{
+    int max, exp;
 
-    // Find the maximum number to know the number of digits
-    int max = get_max(array, size);
+    if (size < 2 || !array)
+        return;
 
-    // Perform counting sort for every digit. Exp is 10^i (1, 10, 100, ...)
-    for (int exp = 1; max / exp > 0; exp *= 10) {
+    max = get_max(array, size);
+
+    for (exp = 1; max / exp > 0; exp *= 10)
+    {
         counting_sort_by_digit(array, size, exp);
-        print_array(array, size);  // Print array after sorting by each digit
+        print_array(array, size);
     }
-}
-
-// Example main to test the function
-int main() {
-    int array[] = {170, 45, 75, 90, 802, 24, 2, 66};
-    size_t size = sizeof(array) / sizeof(array[0]);
-
-    printf("Original array:\n");
-    print_array(array, size);
-
-    printf("Sorting process:\n");
-    radix_sort(array, size);
-
-    printf("Sorted array:\n");
-    print_array(array, size);
-
-    return 0;
 }
