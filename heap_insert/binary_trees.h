@@ -6,6 +6,10 @@
  * @left: Pointer to the left child node
  * @right: Pointer to the right child node
  */
+
+#include <stddef.h>
+#include <stdlib.h>
+
 struct binary_tree_s
 {
     int n;
