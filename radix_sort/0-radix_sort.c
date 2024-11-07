@@ -55,7 +55,8 @@ free(output);
 }
 
 /**
- * radix_sort - Sorts an array of integers in ascending order using LSD radix sort
+ * radix_sort - Sorts an array of integers in
+ * ascending order using LSD radix sort
  * @array: The array to sort
  * @size: The size of the array
  */
