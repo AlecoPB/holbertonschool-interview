@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "sort.h"
 
 void print_array(int *array, size_t size) {
     for (size_t i = 0; i < size; i++) {
