@@ -43,7 +43,7 @@ is_bst(tree->right, tree->n, max));
 
 /**
  * is_avl - check if tree is avl
- * @head: points to head
+ * @tree: points to head
  * Description: Check if a tree is avl
  * Return: 1 if avl
  */
