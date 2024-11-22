@@ -4,6 +4,8 @@
         "string": "c",
         "string_view": "c",
         "binary_trees.h": "c",
-        "cstdlib": "c"
+        "cstdlib": "c",
+        "random": "c",
+        "limits": "c"
     }
 }

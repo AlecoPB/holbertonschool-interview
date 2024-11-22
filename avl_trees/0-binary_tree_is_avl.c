@@ -2,7 +2,12 @@
 #include <stdlib.h>
 #include <limits.h>
 
-/* Helper function to get the height of a tree */
+/**
+ * get_height - find tree height
+ * @tree: points to tree
+ * Description: Find the height of a tree
+ * Return: height
+ */
 int get_height(const binary_tree_t *tree)
 {
 if (tree == NULL)
@@ -14,7 +19,14 @@ int right_height = get_height(tree->right);
 return ((left_height > right_height ? left_height : right_height) + 1);
 }
 
-/* Helper function to check if a binary tree is a BST */
+/**
+ * is_bst - check if tree is bst
+ * @tree: points to head
+ * @min: min value
+ * @max: max value
+ * Description: Check if a tree is bst
+ * Return: true or false
+ */
 int is_bst(const binary_tree_t *tree, int min, int max)
 {
 if (tree == NULL)
@@ -29,7 +41,12 @@ return (is_bst(tree->left, min, tree->n) &&
 is_bst(tree->right, tree->n, max));
 }
 
-/* Helper function to check if a binary tree is balanced (AVL) */
+/**
+ * is_avl - check if tree is avl
+ * @head: points to head
+ * Description: Check if a tree is avl
+ * Return: 1 if avl
+ */
 int is_avl(const binary_tree_t *tree)
 {
 if (tree == NULL)
@@ -46,7 +63,12 @@ return (0);
 return (is_avl(tree->left) && is_avl(tree->right));
 }
 
-/* Main function to check if a binary tree is a valid AVL Tree */
+/**
+ * binary_tree_is_avl - main function to check if avl
+ * @tree: points to head
+ * Description: Check if a tree is valid and avl
+ * Return: 1 if avl, 0 if not or invalid
+ */
 int binary_tree_is_avl(const binary_tree_t *tree)
 {
 if (tree == NULL)
