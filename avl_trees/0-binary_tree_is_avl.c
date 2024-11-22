@@ -11,7 +11,7 @@ return (-1);  /* height of NULL tree is -1 */
 int left_height = get_height(tree->left);
 int right_height = get_height(tree->right);
 
-return (left_height > right_height ? left_height : right_height) + 1;
+return ((left_height > right_height ? left_height : right_height) + 1);
 }
 
 /* Helper function to check if a binary tree is a BST */
@@ -25,8 +25,8 @@ if (tree->n <= min || tree->n >= max)
 return (0);
 
 /* Recursively check left and right subtrees */
-return is_bst(tree->left, min, tree->n) &&
-   is_bst(tree->right, tree->n, max);
+return (is_bst(tree->left, min, tree->n) &&
+is_bst(tree->right, tree->n, max));
 }
 
 /* Helper function to check if a binary tree is balanced (AVL) */
@@ -43,7 +43,7 @@ if (abs(left_height - right_height) > 1)
 return (0);
 
 /* Recursively check if left and right subtrees are AVL */
-return is_avl(tree->left) && is_avl(tree->right);
+return (is_avl(tree->left) && is_avl(tree->right));
 }
 
 /* Main function to check if a binary tree is a valid AVL Tree */
