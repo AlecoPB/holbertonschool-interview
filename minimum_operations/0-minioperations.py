@@ -6,6 +6,7 @@ import sympy as sp
 
 
 def find_prime_factors(n):
+    possible_primes = sp.primerange(n)
     if n % 2 = 0:
         mult = 2
     elif 
