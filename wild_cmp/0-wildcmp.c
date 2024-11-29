@@ -22,15 +22,3 @@ int wildcmp(char *s1, char *s2) {
     // Characters do not match
     return 0;
 }
-
-// Example usage:
-int main() {
-    char s1[] = "abc";
-    char s2[] = "a*";
-    if (wildcmp(s1, s2)) {
-        printf("Strings match!\n");
-    } else {
-        printf("Strings do not match.\n");
-    }
-    return 0;
-}
