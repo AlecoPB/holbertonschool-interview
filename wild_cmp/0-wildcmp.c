@@ -14,7 +14,7 @@ if (*s1 == '\0' && *s2 == '\0')
 /* Both strings are fully traversed */
 return (1);
 }
-if (*s2 == '*') 
+if (*s2 == '*')
 {
 /* * in s2 can match zero or more characters in s1 */
 if (wildcmp(s1, s2 + 1))
