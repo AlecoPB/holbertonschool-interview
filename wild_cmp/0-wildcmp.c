@@ -1,5 +1,12 @@
 #include <stdio.h>
 
+/**
+ * wildcmp - compare two strings
+ * @s1: first string
+ * @s2: second string
+ * Description: Compare two strings
+ * Return: 1 or 0
+ */
 int wildcmp(char *s1, char *s2) {
 if (*s1 == '\0' && *s2 == '\0') {
 // Both strings are fully traversed
