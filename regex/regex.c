@@ -1,5 +1,12 @@
 #include <stdio.h>
 
+/*
+ * regex_match - match two strings 
+ * @str: first string
+ * @pattern: second string
+ * Description: Compare two strings
+ * Return: 1 or 0
+ */
 int regex_match(const char *str, const char *pattern)
 {
 /* Base case: If the pattern is empty */
@@ -15,9 +22,10 @@ int first_match = (*str != '\0') && (*str == *pattern || *pattern == '.');
 if (*(pattern + 1) == '*')
 {
 /* Skip the 'x*' in pattern or use the '*'*/
-return (regex_match(str, pattern + 2) || 
+return (regex_match(str, pattern + 2) ||
 (first_match && regex_match(str + 1, pattern)));
-} else
+}
+else
 {
 /* Regular matching for the first character */
 return (first_match && regex_match(str + 1, pattern + 1));
