@@ -19,10 +19,3 @@ int regex_match(const char *str, const char *pattern) {
         return first_match && regex_match(str + 1, pattern + 1);
     }
 }
-
-int main() {
-    printf("%d\n", regex_match("aab", "c*a*b"));  // Should print 1
-    printf("%d\n", regex_match("mississippi", "mis*is*p*."));  // Should print 0
-    printf("%d\n", regex_match("ab", ".*"));  // Should print 1
-    return 0;
-}
