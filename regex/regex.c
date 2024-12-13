@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-/*
- * regex_match - match two strings
+/**
+ * regex_match - compare two strings
  * @str: first string
  * @pattern: second string
  * Description: Compare two strings
