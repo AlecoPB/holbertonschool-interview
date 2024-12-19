@@ -9,11 +9,11 @@ for (int j = 0; j < 3; j++)
 {
 if (grid[i][j] > 3)
 {
-return false;
+return (false);
 }
 }
 }
-return true;
+return (true);
 }
 
 /* Function to print a 3x3 grid */
@@ -45,10 +45,14 @@ for (int j = 0; j < 3; j++)
 if (grid[i][j] > 3)
 {
 temp[i][j] -= 4;
-if (i > 0) temp[i - 1][j]++;
-if (i < 2) temp[i + 1][j]++;
-if (j > 0) temp[i][j - 1]++;
-if (j < 2) temp[i][j + 1]++;
+if (i > 0)
+temp[i - 1][j]++;
+if (i < 2)
+temp[i + 1][j]++;
+if (j > 0)
+temp[i][j - 1]++;
+if (j < 2)
+temp[i][j + 1]++;
 }
 }
 }
