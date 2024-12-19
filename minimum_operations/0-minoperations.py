@@ -1,7 +1,9 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """
 finds minimum operations
 """
+
+
 def minOperations(n):
     if n < 2:
         return 0  # Cannot achieve n < 2
