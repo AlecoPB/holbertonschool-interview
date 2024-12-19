@@ -18,6 +18,3 @@ def minOperations(n):
         factor += 1
     
     return operations
-
-# Example usage
-print(minOperations(9))  # Expected output: 6
