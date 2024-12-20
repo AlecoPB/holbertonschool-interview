@@ -6,6 +6,7 @@
         "binary_trees.h": "c",
         "cstdlib": "c",
         "random": "c",
-        "limits": "c"
+        "limits": "c",
+        "sandpiles.h": "c"
     }
 }
