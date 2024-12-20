@@ -4,7 +4,7 @@
  * is_stable - check stability
  * @grid: grid (3x3 by default)
  * Description: Function to check if a sandpile is stable
- * return: bool 
+ * return: bool
  */
 static bool is_stable(int grid[3][3])
 {
