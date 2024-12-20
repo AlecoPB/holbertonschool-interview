@@ -4,7 +4,7 @@
  * is_stable - check stability
  * @grid: grid (3x3 by default)
  * Description: Function to check if a sandpile is stable
- * return: bool indicating stability
+ * Return: bool indicating stability
  */
 static bool is_stable(int grid[3][3])
 {
@@ -25,7 +25,7 @@ return (true);
  * print_grid - print grid
  * @grid: grid (3x3 by default)
  * Description: Function to print a grid
- * return: void
+ * Return: void
  */
 static void print_grid(int grid[3][3])
 {
@@ -47,7 +47,7 @@ printf("\n");
  * topple - topple sandpile
  * @grid: grid (3x3 by default)
  * Description: Function to topple sandpile
- * return: void
+ * Return: void
  */
 static void topple(int grid[3][3])
 {
@@ -87,7 +87,7 @@ grid[i][j] += temp[i][j];
  * @grid1: grid (3x3 by default)
  * @grid2: grid (3x3 by default)
  * Description: Function to sum two sandpiles
- * return: void
+ * Return: void
  */
 void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 {
