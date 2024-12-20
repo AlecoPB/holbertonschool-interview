@@ -8,7 +8,7 @@
  * Description: Function that reverses a linked list
  * Returns: Reversed linked list
  */
-bool *reverse_list(listint_t *head)
+listint_t *reverse_list(listint_t *head)
 {
     listint_t *prev = NULL, *next = NULL;
     while (head != NULL)
