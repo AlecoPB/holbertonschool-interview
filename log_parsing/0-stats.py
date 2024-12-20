@@ -2,59 +2,57 @@
 """
 Log parsing
 """
-import sys
-import signal
-import re
-from collections import defaultdict
 
-# Initialize counters
-total_size = 0
-status_code_count = defaultdict(int)
-line_count = 0
 
-# Regex to match the required input format
-log_line_pattern = re.compile(
-    r'^([\d\.]+) - \[(.*?)\] "GET /projects/260 HTTP/1\.1" (\d{3}) (\d+)$'
-)
+if __name__ == '__main__':
 
-# Status codes of interest
-valid_status_codes = {200, 301, 400, 401, 403, 404, 405, 500}
+    import sys
 
-def print_statistics():
-    """Print accumulated statistics."""
-    print(f"File size: {total_size}")
-    for code in sorted(status_code_count.keys()):
-        if status_code_count[code] > 0:
-            print(f"{code}: {status_code_count[code]}")
+    def print_results(statusCodes, fileSize):
+        """
+        Print accumulated statistics.
+        """
+        print(f"File size: {fileSize}")
+        for statusCode, times in sorted(statusCodes.items()):
+            if times:
+                print(f"{statusCode}: {times}")
 
-def signal_handler(sig, frame):
-    """Handle keyboard interrupt (Ctrl + C) to print statistics."""
-    print_statistics()
-    sys.exit(0)
+    # Initialize dictionary to store counts of status codes
+    statusCodes = {
+        "200": 0,
+        "301": 0,
+        "400": 0,
+        "401": 0,
+        "403": 0,
+        "404": 0,
+        "405": 0,
+        "500": 0
+    }
+    # Initialize total file size and line counter
+    fileSize = 0
+    n_lines = 0
 
-# Bind signal handler
-signal.signal(signal.SIGINT, signal_handler)
-
-try:
-    for line in sys.stdin:
-        line = line.strip()
-        match = log_line_pattern.match(line)
-        if match:
-            ip, date, status_code, file_size = match.groups()
-            status_code = int(status_code)
-            file_size = int(file_size)
-
-            # Update metrics
-            total_size += file_size
-            if status_code in valid_status_codes:
-                status_code_count[status_code] += 1
-        
-        line_count += 1
-
-        # Print statistics every 10 lines
-        if line_count % 10 == 0:
-            print_statistics()
-except KeyboardInterrupt:
-    # Catch keyboard interruption
-    print_statistics()
-    sys.exit(0)
+    try:
+        # Read stdin line by line
+        for line in sys.stdin:
+            # Print statistics after every 10 lines
+            if n_lines != 0 and n_lines % 10 == 0:
+                print_results(statusCodes, fileSize)
+            n_lines += 1
+            data = line.split()
+            if len(data) >= 2:
+                try:
+                    # Parse and compute metrics
+                    statusCode = data[-2]
+                    if statusCode in statusCodes:
+                        statusCodes[statusCode] += 1
+                    fileSize += int(data[-1])
+                except (IndexError, ValueError):
+                    # Skip lines with invalid formats
+                    continue
+        # Print final statistics at EOF
+        print_results(statusCodes, fileSize)
+    except KeyboardInterrupt:
+        # Print statistics on keyboard interruption (Ctrl+C)
+        print_results(statusCodes, fileSize)
+        raise
