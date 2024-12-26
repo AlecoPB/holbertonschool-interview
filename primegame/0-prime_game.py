@@ -28,9 +28,9 @@ def isWinner(x, nums):
 
         #winner.append(0) if len(prime_numbers) % 2 == 0 else winner.append(1)
         if len(prime_numbers) % 2 == 0:
-            winner[1] += 1
-        else:
             winner[0] += 1
+        else:
+            winner[1] += 1
         #winner[1] if len(prime_numbers) % 2 == 0 else winner[0] += 1
 
     if winner[0] > winner[1]:
