@@ -19,7 +19,7 @@ def isWinner(x, nums):
 
         p = 2
         while p * p <= nums[round]:
-            if primes(p):
+            if primes[p]:
                 for i in range(p * p, nums[round], p):
                     primes[i] = False
             p += 1
