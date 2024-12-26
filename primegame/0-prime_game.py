@@ -5,6 +5,9 @@ This is some documentation
 
 
 def isWinner(x, nums):
+    """
+    Decides who wins the primegame
+    """
     winner = [0, 0]
     for round in range(x):
         if x < 2:
