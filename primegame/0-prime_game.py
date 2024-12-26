@@ -14,7 +14,7 @@ def isWinner(x, nums):
             winner[1] += 1
             continue
 
-        primes = [True] * nums[round]+1
+        primes = [True] * (nums[round] + 1)
         primes[0], primes[1] = False
 
         p = 2
