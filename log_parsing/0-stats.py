@@ -28,7 +28,6 @@ if __name__ == '__main__':
     n_lines = 0
 
     try:
-        # Read stdin line by line
         for line in sys.stdin:
             # Print statistics after every 10 lines
             if n_lines != 0 and n_lines % 10 == 0:
