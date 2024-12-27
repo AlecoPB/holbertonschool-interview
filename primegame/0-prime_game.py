@@ -7,13 +7,6 @@ Prime Game Solution without Turn Simulation
 def isWinner(x, nums):
     """
     Determines the winner of a series of prime games.
-
-    Args:
-        x (int): Number of rounds.
-        nums (list): List of integers representing the max number for each round.
-
-    Returns:
-        str: "Maria", "Ben", or None depending on the winner.
     """
     if x < 1 or not nums:
         return None
@@ -43,15 +36,10 @@ def isWinner(x, nums):
         return "Ben"
     return None
 
+
 def sieve_of_eratosthenes(n):
     """
     Generates a list of primes up to n using the Sieve of Eratosthenes.
-
-    Args:
-        n (int): Maximum number to consider.
-
-    Returns:
-        list: Boolean list where True indicates a prime number.
     """
     is_prime = [True] * (n + 1)
     is_prime[0] = is_prime[1] = False
