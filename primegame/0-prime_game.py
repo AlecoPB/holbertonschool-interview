@@ -1,41 +1,64 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """
-This is some documentation
+Prime Game Solution without Turn Simulation
 """
 
 
 def isWinner(x, nums):
     """
-    Decides who wins the primegame
+    Determines the winner of a series of prime games.
+
+    Args:
+        x (int): Number of rounds.
+        nums (list): List of integers representing the max number for each round.
+
+    Returns:
+        str: "Maria", "Ben", or None depending on the winner.
     """
-    winner = [0, 0]
-    for round in range(x):
-        if x < 2:
-            winner[1] += 1
-            continue
-
-        primes = [True] * (nums[round] + 1)
-        primes[0] = primes[1] = False
-
-        p = 2
-        while p * p <= nums[round]:
-            if primes[p]:
-                for i in range(p * p, nums[round], p):
-                    primes[i] = False
-            p += 1
-        
-        prime_numbers = [i for i in range(p * p, nums[round] + 1, p) if primes[i]]
-
-        #winner.append(0) if len(prime_numbers) % 2 == 0 else winner.append(1)
-        if len(prime_numbers) % 2 == 0:
-            winner[1] += 1
-        else:
-            winner[0] += 1
-        #winner[1] if len(prime_numbers) % 2 == 0 else winner[0] += 1
-
-    if winner[0] > winner[1]:
-        return 'Maria'
-    elif winner[1] > winner[0]:
-        return 'Ben'
-    else:
+    if x < 1 or not nums:
         return None
+
+    max_n = max(nums)
+    primes = sieve_of_eratosthenes(max_n)
+
+    # Precompute the cumulative count of primes up to each number
+    prime_count = [0] * (max_n + 1)
+    for i in range(1, max_n + 1):
+        prime_count[i] = prime_count[i - 1] + (1 if primes[i] else 0)
+
+    # Track wins for Maria and Ben
+    maria_wins = 0
+    ben_wins = 0
+
+    for n in nums:
+        if prime_count[n] % 2 == 1:  # Odd number of primes: Maria wins
+            maria_wins += 1
+        else:  # Even number of primes: Ben wins
+            ben_wins += 1
+
+    # Determine overall winner
+    if maria_wins > ben_wins:
+        return "Maria"
+    elif ben_wins > maria_wins:
+        return "Ben"
+    return None
+
+def sieve_of_eratosthenes(n):
+    """
+    Generates a list of primes up to n using the Sieve of Eratosthenes.
+
+    Args:
+        n (int): Maximum number to consider.
+
+    Returns:
+        list: Boolean list where True indicates a prime number.
+    """
+    is_prime = [True] * (n + 1)
+    is_prime[0] = is_prime[1] = False
+
+    for p in range(2, int(n ** 0.5) + 1):
+        if is_prime[p]:
+            for multiple in range(p * p, n + 1, p):
+                is_prime[multiple] = False
+
+    return is_prime
