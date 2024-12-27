@@ -24,13 +24,13 @@ def isWinner(x, nums):
                     primes[i] = False
             p += 1
         
-        prime_numbers = [i for i in range(nums[round] + 1) if primes[i]]
+        prime_numbers = [i for i in range(p * p, nums[round] + 1, p) if primes[i]]
 
         #winner.append(0) if len(prime_numbers) % 2 == 0 else winner.append(1)
         if len(prime_numbers) % 2 == 0:
-            winner[0] += 1
-        else:
             winner[1] += 1
+        else:
+            winner[0] += 1
         #winner[1] if len(prime_numbers) % 2 == 0 else winner[0] += 1
 
     if winner[0] > winner[1]:
