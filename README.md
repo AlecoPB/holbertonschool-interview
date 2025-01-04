@@ -1,5 +1,6 @@
 # Interview Preparation Repository
 
+![Holberton school](images/Holberton-Logo.png)
 Welcome to the **Interview Preparation Repository**! This repository is designed to help developers and engineers prepare for coding interviews by solving a variety of algorithm and data structure problems. Each folder in this repository contains solutions and explanations for common technical interview questions, ensuring you're well-prepared for your next interview.
 
 ## Repository Structure
@@ -29,22 +30,6 @@ The repository is organized into different topics, with each folder addressing a
 - **substring**: Find and manipulate substrings in larger strings.
 - **wild_cmp**: Implement wildcard string comparison.
 
-## Getting Started
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your_username/interview-preparation.git
-   ```
-
-2. Navigate to a specific folder to explore problems and solutions.
-   ```bash
-   cd avl_trees
-   ```
-
-3. Run the solutions or test cases using Python 3.9:
-   ```bash
-   python3 solution.py
-   ```
-
 ## Features
 - Each folder contains:
   - **Problem Statement**: A detailed description of the problem.
@@ -54,30 +39,4 @@ The repository is organized into different topics, with each folder addressing a
 
 ## Requirements
 - **Python Version**: 3.9 or higher
-- **Dependencies**: Some problems may require additional libraries like `numpy` or `tensorflow`. Please refer to individual problem folders for specific requirements.
-
-## Contributing
-Contributions are welcome! If you want to improve the solutions or add new problems, follow these steps:
-1. Fork the repository.
-2. Create a new branch:
-   ```bash
-   git checkout -b feature/new-problem
-   ```
-3. Commit your changes:
-   ```bash
-   git commit -m "Add new problem and solution"
-   ```
-4. Push to your fork:
-   ```bash
-   git push origin feature/new-problem
-   ```
-5. Submit a pull request.
-
-## License
-This repository is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-This repository is inspired by common coding challenges found in technical interviews from companies like Google, Facebook, Amazon, and Microsoft. Special thanks to all contributors and the open-source community for their support.
-
-Happy Coding!
-
+- **Dependencies**: Some problems may require additional libraries like `numpy`. Please refer to individual problem folders for specific requirements.
