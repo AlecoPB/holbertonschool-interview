@@ -30,22 +30,18 @@ avl_t *create_node(avl_t *parent, int value)
  */
 avl_t *build_tree(int *array, int start, int end, avl_t *parent)
 {
-	if (array == NULL || start > end)
-		return (NULL);
+    if (start > end)
+        return (NULL);
 
-	size_t mid = (start + end) / 2;
-	avl_t *root = create_node(parent, array[mid]);
+    int mid = (start + end) / 2;
+    avl_t *node = create_node(parent, array[mid]);
+    if (!node)
+        return (NULL);
 
-	if (root == NULL)
-		return (NULL);
+    node->left = build_tree(array, start, mid - 1, node);
+    node->right = build_tree(array, mid + 1, end, node);
 
-	/* Avoid unsigned underflow */
-	if (mid > start)
-		root->left = build_avl_tree(array, start, mid - 1, root);
-	if (mid < end)
-		root->right = build_avl_tree(array, mid + 1, end, root);
-
-	return (root);
+    return (node);
 }
 
 /**
