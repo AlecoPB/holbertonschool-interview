@@ -1,36 +1,41 @@
 #!/usr/bin/node
 
-const axios = require('axios');
+const request = require('request');
 
-// Ensure the script receives a movie ID
-if (process.argv.length < 3) {
-  console.error('Usage: node script.js <Movie ID>');
-  process.exit(1);
+function fetchCharacter (url) {
+  return new Promise((resolve, reject) => {
+    request(url, (error, response, body) => {
+      if (error) return reject(error);
+      resolve(JSON.parse(body).name);
+    });
+  });
 }
 
-const movieId = process.argv[2]; // Get the movie ID from arguments
-const apiUrl = `https://swapi.dev/api/films/${movieId}/`;
+async function getCharacterNames (movieId) {
+  const movieUrl = `https://swapi-api.hbtn.io/api/films/${movieId}/`;
 
-// Function to fetch character names
-async function fetchCharacterNames() {
-  try {
-    // Fetch movie details
-    const response = await axios.get(apiUrl);
-    const filmData = response.data;
-    const characters = filmData.characters;
-
-    console.log(`Movie: ${filmData.title}`);
-    console.log('Characters:');
-
-    // Fetch character names in order
-    for (const characterUrl of characters) {
-      const characterResponse = await axios.get(characterUrl);
-      console.log(characterResponse.data.name);
+  request(movieUrl, async (error, response, body) => {
+    if (error) {
+      console.error(error);
+      return;
     }
-  } catch (error) {
-    console.error('Error fetching data:', error.message);
-  }
+
+    const movieData = JSON.parse(body);
+    const characterUrls = movieData.characters;
+
+    // Fetch characters in sequence to maintain order
+    for (const url of characterUrls) {
+      try {
+        const name = await fetchCharacter(url);
+        console.log(name);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  });
 }
 
-// Run the function
-fetchCharacterNames();
+// Get the Movie ID from the command line argument
+const movieId = process.argv[2];
+
+getCharacterNames(movieId);
