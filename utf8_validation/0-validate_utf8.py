@@ -7,9 +7,6 @@ This is some documentation
 def validUTF8(data):
     """
     Determine if a given data set represents a valid UTF-8 encoding.
-
-    :param data: List[int] - The input data set where each integer represents 1 byte
-    :return: bool - True if the data set is a valid UTF-8 encoding, False otherwise
     """
     def is_valid_byte(byte):
         # Checks if the byte starts with '10'
