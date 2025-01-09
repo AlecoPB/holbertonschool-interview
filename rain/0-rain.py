@@ -1,4 +1,13 @@
+#!/usr/bin/python3
+"""
+This is some documentation
+"""
+
+
 def rain(walls):
+    """
+    Calculate amount of water retained
+    """
     if not walls or len(walls) < 3:
         return 0  # No water can be retained if list is empty or has less than 3 walls
 
