@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "binary_tree.h"
+#include "binary_trees.h"
 
 /**
  * create_node - Creates a new AVL tree node.
