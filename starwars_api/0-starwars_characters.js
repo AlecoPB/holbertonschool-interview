@@ -9,7 +9,7 @@ function fetchCharacter (url) {
       resolve(JSON.parse(body).name);
     });
   });
-}
+};
 
 async function getCharacterNames (movieId) {
   const movieUrl = `https://swapi-api.hbtn.io/api/films/${movieId}/`;
@@ -18,7 +18,7 @@ async function getCharacterNames (movieId) {
     if (error) {
       console.error(error);
       return;
-    }
+    };
 
     const movieData = JSON.parse(body);
     const characterUrls = movieData.characters;
@@ -30,10 +30,10 @@ async function getCharacterNames (movieId) {
         console.log(name);
       } catch (err) {
         console.error(err);
-      }
-    }
+      };
+    };
   });
-}
+};
 
 // Get the Movie ID from the command line argument
 const movieId = process.argv[2];
