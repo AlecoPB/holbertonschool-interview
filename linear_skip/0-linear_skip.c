@@ -15,7 +15,8 @@ return (NULL);
 
 while (curr->express)
 {
-printf("Value checked at index [%lu] = [%d]\n", curr->express->index, curr->express->n);
+printf("Value checked at index [%lu] = [%d]\n",
+curr->express->index, curr->express->n);
 if (curr->express->n >= value)
 break;
 prev = curr;
