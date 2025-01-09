@@ -19,7 +19,6 @@ for (int col = 0; col < size; col++)
 int x = row, y = col;
 int is_space = 0;
 
-// Check if the position should be a space
 while (x > 0 || y > 0)
 {
 if (x % 3 == 1 && y % 3 == 1)
