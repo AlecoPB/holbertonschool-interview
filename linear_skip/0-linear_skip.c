@@ -8,42 +8,39 @@
  */
 skiplist_t *linear_skip(skiplist_t *list, int value)
 {
-    skiplist_t *prev = NULL, *curr = list;
+skiplist_t *prev = NULL, *curr = list;
 
-    if (!list)
-        return (NULL);
+if (!list)
+return (NULL);
 
-    // Traverse the express lane
-    while (curr->express)
-    {
-        printf("Value checked at index [%lu] = [%d]\n", curr->express->index, curr->express->n);
-        if (curr->express->n >= value)
-            break;
-        prev = curr;
-        curr = curr->express;
-    }
+while (curr->express)
+{
+printf("Value checked at index [%lu] = [%d]\n", curr->express->index, curr->express->n);
+if (curr->express->n >= value)
+break;
+prev = curr;
+curr = curr->express;
+}
 
-    // If we reached the end of the express lane, set prev to curr
-    if (!curr->express)
-    {
-        prev = curr;
-        while (curr->next)
-            curr = curr->next;
-    }
+if (!curr->express)
+{
+prev = curr;
+while (curr->next)
+curr = curr->next;
+}
 
-    printf("Value found between indexes [%lu] and [%lu]\n", prev->index, curr->index);
+printf("Value found between indexes [%lu] and [%lu]\n", prev->index, curr->index);
 
-    // Perform linear search in the range
-    curr = prev;
-    while (curr)
-    {
-        printf("Value checked at index [%lu] = [%d]\n", curr->index, curr->n);
-        if (curr->n == value)
-            return (curr);
-        if (curr->n > value)
-            break;
-        curr = curr->next;
-    }
+curr = prev;
+while (curr)
+{
+printf("Value checked at index [%lu] = [%d]\n", curr->index, curr->n);
+if (curr->n == value)
+return (curr);
+if (curr->n > value)
+break;
+curr = curr->next;
+}
 
-    return (NULL);
+return (NULL);
 }
