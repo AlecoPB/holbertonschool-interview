@@ -9,7 +9,7 @@ def rain(walls):
     Calculate amount of water retained
     """
     if not walls or len(walls) < 3:
-        return 0  # No water can be retained if list is empty or has less than 3 walls
+        return 0
 
     left, right = 0, len(walls) - 1
     left_max, right_max = 0, 0
