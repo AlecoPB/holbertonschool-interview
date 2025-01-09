@@ -1,70 +1,59 @@
+#include <stdlib.h>
 #include "binary_trees.h"
 
 /**
- * create_node - Creates a new AVL tree node
- *
- * @parent: Pointer to the parent node of the new node
- * @value: Integer value to be stored in the node
- *
- * Return: Pointer to the new node, or NULL on failure
+ * create_node - Creates a new AVL tree node.
+ * @parent: Pointer to the parent node.
+ * @value: Value to store in the node.
+ * Return: Pointer to the created node, or NULL on failure.
  */
 avl_t *create_node(avl_t *parent, int value)
 {
-	avl_t *node = malloc(sizeof(avl_t));
+    avl_t *node = malloc(sizeof(avl_t));
+    if (!node)
+        return (NULL);
 
-	if (node == NULL)
-		return (NULL);
-
-	node->n = value;
-	node->parent = parent;
-	node->left = NULL;
-	node->right = NULL;
-	return (node);
+    node->n = value;
+    node->parent = parent;
+    node->left = NULL;
+    node->right = NULL;
+    return (node);
 }
 
 /**
- * build_avl_tree - Recursive helper function to build the AVL tree
- *
- * @array: Pointer to the first element of the array
- * @start: Starting index of the sub-array
- * @end: Ending index of the sub-array
- * @parent: Pointer to the parent node
- *
- * Return: Pointer to the root node of the tree, or NULL on failure
+ * build_tree - Recursively builds the AVL tree.
+ * @array: Pointer to the array of integers.
+ * @start: Starting index of the current subarray.
+ * @end: Ending index of the current subarray.
+ * @parent: Pointer to the parent node.
+ * Return: Pointer to the root of the subtree, or NULL on failure.
  */
-avl_t *build_avl_tree(int *array, size_t start, size_t end, avl_t *parent)
+avl_t *build_tree(int *array, int start, int end, avl_t *parent)
 {
-	if (array == NULL || start > end)
-		return (NULL);
+    if (start > end)
+        return (NULL);
 
-	/* Find the middle index and create a node containing the middle value */
-	size_t mid = (start + end) / 2;
-	avl_t *root = create_node(parent, array[mid]);
+    int mid = (start + end) / 2;
+    avl_t *node = create_node(parent, array[mid]);
+    if (!node)
+        return (NULL);
 
-	if (root == NULL)
-		return (NULL);
+    node->left = build_tree(array, start, mid - 1, node);
+    node->right = build_tree(array, mid + 1, end, node);
 
-	/* Avoid unsigned underflow */
-	if (mid > start)
-		root->left = build_avl_tree(array, start, mid - 1, root);
-	if (mid < end)
-		root->right = build_avl_tree(array, mid + 1, end, root);
-
-	return (root);
+    return (node);
 }
 
 /**
- * sorted_array_to_avl - Builds an AVL tree from a sorted array
- *
- * @array: Pointer to the first element of the array
- * @size: Number of elements in the array
- *
- * Return: Pointer to the root node of the created AVL tree, or NULL on failure
+ * sorted_array_to_avl - Builds an AVL tree from a sorted array.
+ * @array: Pointer to the first element of the array.
+ * @size: Number of elements in the array.
+ * Return: Pointer to the root node of the created AVL tree, or NULL on failure.
  */
 avl_t *sorted_array_to_avl(int *array, size_t size)
 {
-	if (array == NULL || size == 0)
-		return (NULL);
+    if (!array || size == 0)
+        return (NULL);
 
-	return (build_avl_tree(array, 0, size - 1, NULL));
+    return (build_tree(array, 0, size - 1, NULL));
 }
