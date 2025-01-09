@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import sys
 
+
 def is_safe(board, row, col, N):
     """
     Check if placing a queen at (row, col) is safe.
@@ -17,6 +18,7 @@ def is_safe(board, row, col, N):
 
     return True
 
+
 def solve_nqueens(N, row, board, solutions):
     """
     Recursively solve the N queens problem.
@@ -32,6 +34,7 @@ def solve_nqueens(N, row, board, solutions):
             solve_nqueens(N, row + 1, board, solutions)
             # Backtrack: clear the row for the next iteration
             board[row] = -1
+
 
 def nqueens(N):
     """
@@ -56,6 +59,7 @@ def nqueens(N):
     # Print all solutions
     for solution in solutions:
         print(solution)
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
