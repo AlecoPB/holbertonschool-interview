@@ -1,6 +1,15 @@
 #include "sort.h"
 #include <stdio.h>
 
+/**
+ * sift_down - Perform sift down operation
+ * @array: array to perform opertion on
+ * @size: size of the array
+ * @root: root of the array
+ * @end: end of the array
+ * 
+ * Return: Sifts down
+ */
 void sift_down(int *array, size_t size, size_t root, size_t end)
 {
 size_t largest = root;
