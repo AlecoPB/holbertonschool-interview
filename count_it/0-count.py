@@ -2,8 +2,8 @@
 """
 This is some documentation
 """
-import re
 from collections import Counter
+import re
 
 
 def count_words(subreddit, word_list, after=None, counts=None):
