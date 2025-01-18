@@ -4,6 +4,7 @@ This is some documentation
 """
 import requests
 
+
 def count_words(subreddit, word_list, after=None, counter=None):
     """
     Recursive function to count occurrences of
@@ -43,7 +44,7 @@ def count_words(subreddit, word_list, after=None, counter=None):
     for post in posts:
         title = post.get("data", {}).get("title", "").lower().split()
         for word in title:
-            clean_word = ''.join(filter(str.isalnum, word))  # Remove punctuation
+            clean_word = ''.join(filter(str.isalnum, word))
             if clean_word in counter:
                 counter[clean_word] += 1
 
