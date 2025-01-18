@@ -2,60 +2,56 @@
 """
 This is some documentation
 """
-from collections import Counter
-import re
+import requests
 
+def count_words(subreddit, word_list, after=None, counter=None):
+    """
+    Recursive function to count occurrences of keywords in hot posts of a subreddit.
 
-def count_words(subreddit, word_list, after=None, counts=None):
-    """Recursively queries the Reddit API and counts occurrences of keywords in hot article titles."""
-    if counts is None:
-        counts = Counter()
-
-    # Define the API endpoint
-    url = f'https://www.reddit.com/r/{subreddit}/hot.json'
-    headers = {'User -Agent': 'Mozilla/5.0'}
-
-    # Set parameters for the API request
-    params = {'limit': 100}
-    if after:
-        params['after'] = after
-
-    # Make the API request
-    response = requests.get(url, headers=headers, params=params)
-
-    # Check for valid subreddit
-    if response.status_code != 200:
+    Args:
+        subreddit (str): The subreddit to query.
+        word_list (list): List of keywords to count.
+        after (str): Pagination parameter for Reddit API (default: None).
+        counter (dict): Accumulator for keyword counts (default: None).
+    """
+    # Initialize the counter dictionary on the first call
+    if counter is None:
+        counter = {word.lower(): 0 for word in word_list}
+    if not word_list:
         return
-
-    # Parse the JSON response
-    data = response.json()
-    articles = data.get('data', {}).get('children', [])
-    after = data.get('data', {}).get('after', None)
-
-    # Process each article
-    for article in articles:
-        title = article['data']['title'].lower()  # Convert title to lowercase
-        for word in word_list:
-            # Create a regex pattern for the word
-            pattern = r'\b' + re.escape(word.lower()) + r'\b'
-            matches = re.findall(pattern, title)
-            counts[word.lower()] += len(matches)
-
-    # If there are more articles, recurse
-    if after:
-        count_words(subreddit, word_list, after, counts)
-
-    # Print the results after all recursive calls
-    if after is None:  # Only print once after the final call
-        print_results(counts)
-
-def print_results(counts):
-    """Prints the sorted results of keyword counts."""
-    # Filter out words with zero counts
-    filtered_counts = {word: count for word, count in counts.items() if count > 0}
     
-    # Sort by count (descending) and then alphabetically (ascending)
-    sorted_counts = sorted(filtered_counts.items(), key=lambda x: (-x[1], x[0]))
-
-    for word, count in sorted_counts:
-        print(f"{word}: {count}")
+    # Base API URL
+    url = f"https://www.reddit.com/r/{subreddit}/hot.json"
+    headers = {"User-Agent": "keyword-count-bot"}
+    params = {"limit": 100, "after": after}
+    
+    # Make the request to Reddit
+    response = requests.get(url, headers=headers, params=params, allow_redirects=False)
+    
+    if response.status_code != 200:
+        return  # Exit if subreddit is invalid or unreachable
+    
+    # Parse JSON data
+    data = response.json()
+    posts = data.get("data", {}).get("children", [])
+    after = data.get("data", {}).get("after", None)
+    
+    # Process titles of the posts
+    for post in posts:
+        title = post.get("data", {}).get("title", "").lower().split()
+        for word in title:
+            clean_word = ''.join(filter(str.isalnum, word))  # Remove punctuation
+            if clean_word in counter:
+                counter[clean_word] += 1
+    
+    # Recursively call the function if there are more pages
+    if after:
+        count_words(subreddit, word_list, after, counter)
+    else:
+        # Sorting and printing results once recursion ends
+        sorted_counts = sorted(
+            [(word, count) for word, count in counter.items() if count > 0],
+            key=lambda x: (-x[1], x[0])  # Descending by count, then alphabetically
+        )
+        for word, count in sorted_counts:
+            print(f"{word}: {count}")
