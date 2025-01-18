@@ -11,17 +11,17 @@
  */
 void print_sub_array(const int *array, size_t start, size_t end)
 {
-    if (array == NULL || start > end)
-        return;
+	size_t i = start;
 
-    printf("Searching in array: ");
-    for (size_t i = start; i < end; i++)
-    {
-        if (i > start)
-            printf(", ");
-        printf("%d", array[i]);
-    }
-    printf("\n");
+	printf("Searching in array: ");
+	while (array && i <= end)
+	{
+		if (i > start)
+			printf(", ");
+		printf("%d", array[i]);
+		++i;
+	}
+	printf("\n");
 }
 
 /**
@@ -35,27 +35,23 @@ void print_sub_array(const int *array, size_t start, size_t end)
  */
 int recursive_binary(int *array, size_t left, size_t right, int value)
 {
-    if (left > right)
-        return (-1);
+	if (left > right)
+		return (-1);
 
-    print_sub_array(array, left, right + 1); // right + 1 to include the rightmost element
+	print_sub_array(array, left, right);
 
-    size_t mid = left + (right - left) / 2;
+	size_t mid = left + (right - left) / 2;
 
-    // Check if mid is the leftmost occurrence
-    if (array[mid] == value)
-    {
-        // If it's the first occurrence or the left boundary
-        if (mid == left || array[mid - 1] < value)
-            return (mid);
-    }
+	/* Check if mid is the leftmost occurence */
+	if (array[mid] == value && (mid == left || array[mid - 1] != value))
+		return (mid);
 
-    // Keep searching the left half
-    if (array[mid] >= value)
-        return (recursive_binary(array, left, mid - 1, value)); // mid - 1 to avoid mid being counted again
+	/* Keep searching the left half */
+	if (array[mid] >= value)
+		return (recursive_binary(array, left, mid, value));
 
-    // Keep searching in the right half
-    return (recursive_binary(array, mid + 1, right, value));
+	/* Keep searching in the right half */
+	return (recursive_binary(array, mid + 1, right, value));
 }
 
 /**
@@ -68,8 +64,8 @@ int recursive_binary(int *array, size_t left, size_t right, int value)
  */
 int advanced_binary(int *array, size_t size, int value)
 {
-    if (array == NULL || size == 0)
-        return (-1);
+	if (array == NULL || size == 0)
+		return (-1);
 
-    return (recursive_binary(array, 0, size - 1, value));
+	return (recursive_binary(array, 0, size - 1, value));
 }
