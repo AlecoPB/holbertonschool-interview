@@ -1,6 +1,6 @@
+#include "sort.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "print_array.h"
 
 /**
  * merge - Merges two subarrays into a single sorted subarray.
@@ -35,7 +35,7 @@ void merge(int *array, int *temp, size_t left, size_t mid, size_t right)
     for (i = left; i <= right; i++)
         array[i] = temp[i];
 
-    /* Print the current array */
+    /* Print the current state of the array */
     printf("Merging...\n");
     print_array(array + left, right - left + 1);
 }
