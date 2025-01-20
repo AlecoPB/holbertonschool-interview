@@ -5,6 +5,11 @@ This is some documentation
 
 
 def island_perimeter(grid):
+    """island perimeter
+
+    Args:
+        grid: a grid representing the island
+    """
     if not grid:
         return 0
 

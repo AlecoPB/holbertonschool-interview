@@ -8,9 +8,9 @@ def makeChange(coins, total):
     """
     Determine the fewest number of coins needed to meet a given total.
 
-    :param coins: List of the values of the coins in your possession.
-    :param total: The target amount.
-    :return: Fewest number of coins needed to meet the total (-1 if failed)
+    coins: List of the values of the coins in your possession.
+    total: The target amount.
+    return: Fewest number of coins needed to meet the total (-1 if failed)
     """
     if total <= 0:
         return 0
