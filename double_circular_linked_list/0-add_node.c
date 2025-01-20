@@ -49,7 +49,7 @@ return (new_node);
 }
 
 /**
- * add_node_begin - Adds a new node at the beginning of a doubly circular linked list
+ * add_node_begin - Adds a new node at the beginning
  * @list: Double pointer to the list to modify
  * @str: The string to copy into the new node
  *
