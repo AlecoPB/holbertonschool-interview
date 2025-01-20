@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "list.h" // Assuming you have a header file named list.h for the List structure
+#include "list.h"
 
 /**
  * add_node_end - Adds a new node at the end of a doubly circular linked list
