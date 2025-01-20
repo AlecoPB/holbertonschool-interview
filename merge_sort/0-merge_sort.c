@@ -52,8 +52,7 @@ void merge_sort_recursive(int *array, int *temp, size_t left, size_t right)
     if (left >= right)
         return;
 
-    /* Split the array into two halves */
-    size_t mid = left + (right - left) / 2;
+    size_t mid = left + (right - left + 1) / 2 - 1;
 
     /* Sort the left half */
     merge_sort_recursive(array, temp, left, mid);
@@ -61,8 +60,15 @@ void merge_sort_recursive(int *array, int *temp, size_t left, size_t right)
     /* Sort the right half */
     merge_sort_recursive(array, temp, mid + 1, right);
 
-    /* Merge the two halves */
-    merge(array, temp, left, mid + 1, right);
+    /* Print the sub-arrays before merging */
+    print_subarrays(array, left, mid, right);
+
+    /* Merge the sorted halves */
+    merge(array, temp, left, mid, right);
+
+    /* Print the merged array */
+    printf("[Done]: ");
+    print_array(&array[left], right - left + 1);
 }
 
 /**
@@ -77,11 +83,6 @@ void merge_sort(int *array, size_t size)
 
     /* Allocate temporary array for merging */
     int *temp = malloc(size * sizeof(int));
-    if (!temp)
-    {
-        fprintf(stderr, "Error: Memory allocation failed\n");
-        return;
-    }
 
     /* Perform recursive merge sort */
     merge_sort_recursive(array, temp, 0, size - 1);
