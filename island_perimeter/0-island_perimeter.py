@@ -1,3 +1,9 @@
+#!/usr/bin/python3
+"""
+This is some documentation
+"""
+
+
 def island_perimeter(grid):
     if not grid:
         return 0
