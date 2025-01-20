@@ -29,25 +29,20 @@ heapify_down(largest);
 }
 
 /**
- * heap_extract - Extracts the root node from a Max Binary Heap.
- * @root: Double pointer to the root node of the heap.
- * Return: Value of the root node or 0 on failure.
+ * find_last_node - Finds the last node in a Max Binary Heap using level-order traversal.
+ * @root: Pointer to the root of the heap.
+ * Return: Pointer to the last node.
  */
-int heap_extract(heap_t **root)
+heap_t *find_last_node(heap_t *root)
 {
-if (!root || !*root)
-return (0);
-
-heap_t *current = *root, *last = NULL;
-int value = current->n;
-
-/* Find the last node using level-order traversal */
+heap_t *current = root;
 heap_t **queue = malloc(sizeof(heap_t *) * 1024);
 size_t front = 0, rear = 0;
-if (!queue)
-return (0);
 
-queue[rear++] = *root;
+if (!queue)
+return (NULL);
+
+queue[rear++] = root;
 while (front < rear)
 {
 current = queue[front++];
@@ -56,24 +51,25 @@ queue[rear++] = current->left;
 if (current->right)
 queue[rear++] = current->right;
 }
-last = current;
-
-/* Replace root node value with last node value */
-if (last == *root)
-{
-free(*root);
-*root = NULL;
 free(queue);
-return (value);
+return (current);
 }
 
-(*root)->n = last->n;
+/**
+ * delete_last_node - Deletes the last node from the heap.
+ * @root: Pointer to the root of the heap.
+ * @last: Pointer to the last node.
+ */
+void delete_last_node(heap_t *root, heap_t *last)
+{
+heap_t *current = root;
+heap_t **queue = malloc(sizeof(heap_t *) * 1024);
+size_t front = 0, rear = 0;
 
-/* Remove the last node */
-current = *root;
-front = 0;
-rear = 0;
-queue[rear++] = *root;
+if (!queue)
+return;
+
+queue[rear++] = root;
 while (front < rear)
 {
 current = queue[front++];
@@ -98,10 +94,35 @@ break;
 queue[rear++] = current->right;
 }
 }
+free(queue);
+}
 
-/* Rebuild the heap */
+/**
+ * heap_extract - Extracts the root node from a Max Binary Heap.
+ * @root: Double pointer to the root node of the heap.
+ * Return: Value of the root node or 0 on failure.
+ */
+int heap_extract(heap_t **root)
+{
+if (!root || !*root)
+return (0);
+
+heap_t *last = find_last_node(*root);
+int value = (*root)->n;
+
+if (last == *root) /* Single node case */
+{
+free(*root);
+*root = NULL;
+return (value);
+}
+
+/* Replace root with the last node's value */
+(*root)->n = last->n;
+
+/* Delete the last node and rebuild the heap */
+delete_last_node(*root, last);
 heapify_down(*root);
 
-free(queue);
 return (value);
 }
