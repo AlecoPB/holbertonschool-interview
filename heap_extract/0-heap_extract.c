@@ -36,7 +36,7 @@ void heapify_down(heap_t *node)
 int heap_extract(heap_t **root)
 {
     if (!root || !*root)
-        return 0;
+        return (0);
 
     heap_t *current = *root, *last = NULL;
     int value = current->n;
@@ -45,7 +45,7 @@ int heap_extract(heap_t **root)
     heap_t **queue = malloc(sizeof(heap_t *) * 1024);
     size_t front = 0, rear = 0;
     if (!queue)
-        return 0;
+        return (0);
 
     queue[rear++] = *root;
     while (front < rear)
@@ -64,7 +64,7 @@ int heap_extract(heap_t **root)
         free(*root);
         *root = NULL;
         free(queue);
-        return value;
+        return (value);
     }
 
     (*root)->n = last->n;
@@ -103,5 +103,5 @@ int heap_extract(heap_t **root)
     heapify_down(*root);
 
     free(queue);
-    return value;
+    return (value);
 }
