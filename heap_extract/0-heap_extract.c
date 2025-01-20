@@ -29,7 +29,7 @@ heapify_down(largest);
 }
 
 /**
- * find_last_node - Finds the last node in a Max Binary Heap using level-order traversal.
+ * find_last_node - Finds the last node
  * @root: Pointer to the root of the heap.
  * Return: Pointer to the last node.
  */
