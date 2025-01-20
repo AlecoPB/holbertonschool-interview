@@ -69,7 +69,7 @@ result[i] += carry;
 while (*result == '0' && *(result + 1))
 result++;
 
-return strdup(result);
+return (strdup(result));
 }
 
 /**
