@@ -42,7 +42,6 @@ int heap_extract(heap_t **root)
     int value = current->n;
 
     /* Find the last node using level-order traversal */
-    size_t level = 0;
     heap_t **queue = malloc(sizeof(heap_t *) * 1024);
     size_t front = 0, rear = 0;
     if (!queue)
