@@ -41,6 +41,21 @@ void merge(int *array, int *temp, size_t left, size_t mid, size_t right)
 }
 
 /**
+ * print_subarrays - print the left and right sub-arrays being merged
+ * @array: The original array
+ * @left: The start index of the left sub-array
+ * @mid: The end index of the left sub-array
+ * @right: The end index of the right sub-array
+ */
+void print_subarrays(int *array, size_t left, size_t mid, size_t right)
+{
+	printf("Merging...\n[left]: ");
+	print_array(&array[left], mid - left + 1);
+	printf("[right]: ");
+	print_array(&array[mid + 1], right - mid);
+}
+
+/**
  * merge_sort_recursive - Recursively sorts an array using merge sort.
  * @array: The original array to sort.
  * @temp: Temporary array for merging.
