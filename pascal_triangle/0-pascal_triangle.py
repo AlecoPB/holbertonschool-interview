@@ -6,7 +6,7 @@ This is some documentation
 
 def pascal_triangle(n):
     """pascal triangle
-    
+
     n (int): int to build the triangle
     return: list representing a pascal triangle
     """
