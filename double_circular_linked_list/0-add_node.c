@@ -12,40 +12,40 @@
  */
 List *add_node_end(List **list, char *str)
 {
-    List *new_node;
-    List *last;
+List *new_node;
+List *last;
 
-    if (str == NULL)
-        return (NULL);
+if (str == NULL)
+return (NULL);
 
-    new_node = malloc(sizeof(List));
-    if (new_node == NULL)
-        return (NULL);
+new_node = malloc(sizeof(List));
+if (new_node == NULL)
+return (NULL);
 
-    new_node->str = strdup(str);
-    if (new_node->str == NULL)
-    {
-        free(new_node);
-        return (NULL);
-    }
+new_node->str = strdup(str);
+if (new_node->str == NULL)
+{
+free(new_node);
+return (NULL);
+}
 
-    new_node->next = new_node; // Point to itself
-    new_node->prev = new_node; // Point to itself
+new_node->next = new_node;
+new_node->prev = new_node;
 
-    if (*list == NULL)
-    {
-        *list = new_node; // If the list is empty, set the new node as the head
-    }
-    else
-    {
-        last = (*list)->prev; // Get the last node
-        last->next = new_node; // Link the last node to the new node
-        new_node->prev = last; // Link the new node back to the last node
-        new_node->next = *list; // Link the new node to the head
-        (*list)->prev = new_node; // Link the head back to the new node
-    }
+if (*list == NULL)
+{
+*list = new_node;
+}
+else
+{
+last = (*list)->prev;
+last->next = new_node;
+new_node->prev = last;
+new_node->next = *list;
+(*list)->prev = new_node;
+}
 
-    return (new_node);
+return (new_node);
 }
 
 /**
@@ -57,38 +57,38 @@ List *add_node_end(List **list, char *str)
  */
 List *add_node_begin(List **list, char *str)
 {
-    List *new_node;
+List *new_node;
 
-    if (str == NULL)
-        return (NULL);
+if (str == NULL)
+return (NULL);
 
-    new_node = malloc(sizeof(List));
-    if (new_node == NULL)
-        return (NULL);
+new_node = malloc(sizeof(List));
+if (new_node == NULL)
+return (NULL);
 
-    new_node->str = strdup(str);
-    if (new_node->str == NULL)
-    {
-        free(new_node);
-        return (NULL);
-    }
+new_node->str = strdup(str);
+if (new_node->str == NULL)
+{
+free(new_node);
+return (NULL);
+}
 
-    new_node->next = new_node; // Point to itself
-    new_node->prev = new_node; // Point to itself
+new_node->next = new_node;
+new_node->prev = new_node;
 
-    if (*list == NULL)
-    {
-        *list = new_node; // If the list is empty, set the new node as the head
-    }
-    else
-    {
-        new_node->next = *list; // Link the new node to the head
-        new_node->prev = (*list)->prev; // Link the new node to the last node
-        (*list)->prev->next = new_node; // Link the last node to the new node
-        (*list)->prev = new_node; // Link the head back to the new node
-    }
+if (*list == NULL)
+{
+*list = new_node;
+}
+else
+{
+new_node->next = *list;
+new_node->prev = (*list)->prev;
+(*list)->prev->next = new_node;
+(*list)->prev = new_node;
+}
 
-    *list = new_node; // Set the new node as the head
+*list = new_node;
 
-    return (new_node);
+return (new_node);
 }
